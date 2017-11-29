@@ -232,9 +232,13 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-    return _.every(collection, function(item) {
+    return !!_.reduce(collection, function(allFalse, item) {
+      if (iterator) {
+        return allFalse || iterator(item); 
+      }
       
-    });
+      return allFalse || item;
+    }, false);
   };
 
 
@@ -257,6 +261,16 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    // each iterate over arguments
+    _.each(arguments, function(arg) {
+      _.each(arg, function(value, key) {
+        obj[key] = value;
+      });
+    });
+      // each iterate over object key value pairs
+        // add on to object
+    // return object
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
