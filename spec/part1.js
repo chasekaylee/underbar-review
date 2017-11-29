@@ -499,7 +499,6 @@
       });
 
       it('should recognize accumulator present even if zero', function() {
-        debugger;
         var result = _.reduce([1, 2, 3], function(memo, item) {
           return memo * item;
         }, 0);
